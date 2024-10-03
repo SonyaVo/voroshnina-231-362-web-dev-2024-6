@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>Функции</title>
+</head>
+
+<body>
+
+    <h1>Функции</h1>
+
+    <!-- Ввод данных -->
+    <div>
+        <label for="x">Введите x:  </label>
+        <input type="number" id="x"><br><br>
+    </div>
+
+    <div>
+        <label for="n">Введите n: </label>
+        <input type="number" id="n"><br><br>
+    </div>
+    <div>
+        <label for="a">Введите a: </label>
+        <input type="number" id="a"><br><br>
+    </div>
+    <div>
+        <label for="b">Введите b: </label>
+        <input type="number" id="b"><br><br>
+    </div>
+    <div>
+        <label for="d">Введите d: </label>
+        <input type="number" id="d"><br><br>
+    </div>
+    <div>
+        <label for="fib_n">Введите fib_n: </label>
+        <input type="number" id="fib_n"><br><br>
+    </div>
+    <div>
+        <label for="count">Введите количество записей: </label>
+        <input type="number" id="count"><br><br>
+    </div>
+    <div>
+        <button class="bt" onclick="runFunctions()">Выполнить</button>
+    </div>
+    <div>
+        <p class="result" id="result"></p>
+    </div>
+    <script>
+
+        // Возведение в степень (pow)
+        function pow(x, n) {
+            let result = 1;
+            for (let i = 0; i < n; i++) {
+                result *= x;
+            }
+            return result;
+        }
+
+        // Нахождение НОД (gcd)
+        function gcd(a, b) {
+            while (b !== 0) {
+                let temp = b;
+                b = a % b;
+                a = temp;
+            }
+            return a;
+        }
+
+        // Наименьшая цифра числа (minDigit)
+        function minDigit(x) {
+            let digits = x.toString().split('').map(Number);
+            return Math.min(...digits);
+        }
+
+        // Формирование множественного числа (pluralizeRecords)
+        function pluralizeRecords(n) {
+            let recordWord;
+            if (n % 10 === 1 && n % 100 !== 11) {
+                recordWord = "запись";
+            } else if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) {
+                recordWord = "записи";
+            } else {
+                recordWord = "записей";
+            }
+            return `В результате выполнения запроса было найдено ${n} ${recordWord}.`;
+        }
+
+        // Числа Фибоначчи (fibb)
+        function fibb(n) {
+            if (n <= 1) return n;
+            let a = 0, b = 1;
+            for (let i = 2; i <= n; i++) {
+                let temp = a + b;
+                a = b;
+                b = temp;
+            }
+            return b;
+        }
+
+        // Выполнение всех функций
+        function runFunctions() {
+            const x = Number(document.getElementById('x').value);
+            const n = Number(document.getElementById('n').value);
+            const d = Number(document.getElementById('d').value);
+            const a = Number(document.getElementById('a').value);
+            const b = Number(document.getElementById('b').value);
+            const fib_n = Number(document.getElementById('fib_n').value);
+            const count = Number(document.getElementById('count').value);
+
+            let result = '';
+
+            if (!isNaN(x) && !isNaN(n) && n > 0) {
+                result += `Возведение в степень(${x}, ${n}) = ${pow(x, n)}<br>`;
+            }
+
+            if (!isNaN(a) && !isNaN(b)) {
+                result += `НОД(${a}, ${b}) = ${gcd(a, b)}<br>`;
+            }
+
+            if (!isNaN(d)) {
+                result += `Мин.цифра(${d}) = ${minDigit(d)}<br>`;
+            }
+
+            if (!isNaN(count)) {
+                result += pluralizeRecords(count) + '<br>';
+            }
+
+            if (!isNaN(fib_n) && fib_n >= 0) {
+                result += `Число фибоначи(${fib_n}) = ${fibb(fib_n)}<br>`;
+            }
+
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+
+</body>
+
+</html>
