@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <title>Функции</title>
 </head>
 
@@ -17,7 +18,7 @@
 
     <!-- Ввод данных -->
     <div>
-        <label for="x">Введите x:  </label>
+        <label for="x">Введите x: </label>
         <input type="number" id="x"><br><br>
     </div>
 
@@ -75,20 +76,34 @@
         // Наименьшая цифра числа (minDigit)
         function minDigit(x) {
             let digits = x.toString().split('').map(Number);
-            return Math.min(...digits);
+            let min = digits[0];
+
+            for (let i = 1; i < digits.length; i++) {
+                if (digits[i] < min) {
+                    min = digits[i];
+
+                }
+            }
+
+            return min;
         }
 
-        // Формирование множественного числа (pluralizeRecords)
+        // изменение формы 
         function pluralizeRecords(n) {
             let recordWord;
+            let recordWord2;
             if (n % 10 === 1 && n % 100 !== 11) {
-                recordWord = "запись";
+                recordWord = "была найдена";
+                recordWord2 = "запись";
             } else if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) {
-                recordWord = "записи";
+                recordWord = "были найдены";
+                recordWord2 = "записи";
+
             } else {
-                recordWord = "записей";
+                recordWord = "были найдены";
+                recordWord2 = "записей";
             }
-            return `В результате выполнения запроса было найдено ${n} ${recordWord}.`;
+            return `В результате выполнения запроса ${recordWord} ${n} ${recordWord2}.`;
         }
 
         // Числа Фибоначчи (fibb)
@@ -137,6 +152,15 @@
 
             document.getElementById('result').innerHTML = result;
         }
+
+
+        //document.getElementsByName(name)
+        //document.getElementsByTagName(tagName)
+        //document.querySelectorAll(selector)
+        //document.forms
+        //document.links
+        //document.images
+
     </script>
 
 </body>
